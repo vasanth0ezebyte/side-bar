@@ -25,29 +25,69 @@
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  padding: 12px 15px;
   font-size: 16px;
   color: #57606a;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
+  position: relative;
 }
 
 .menu-item:hover {
   background-color: #eaeef2;
 }
 
+/* Selected menu item */
 .menu-item.selected {
   background-color: #eaeef2;
   font-weight: 600;
-  border-left: 4px solid #0969da;
   color: #1f2328;
+  border-left: 3px solid #0969da; /* Ensure all selected items have a blue bar */
+}
+
+/* Special styling for Backlog */
+.menu-item.backlog.selected {
+  background-color: #e9f2ff !important; /* Light blue background */
+  color: #0969da !important; /* Blue text */
+  font-weight: 600;
+  border-left: none; /* Remove default left border */
+}
+
+/* Backlog-specific left bar */
+.menu-item.backlog.selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 30%;
+  height: 40%;
+  width: 3px;
+  background-color: #0969da;
+}
+
+/* Blue icon only for Backlog */
+.menu-item.backlog .icon {
+  color: #0969da !important;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* Ensure other selected menu items retain blue left bar */
+.menu-item.selected:not(.backlog) {
+  border-left: 3px solid #0969da;
+}
+
+/* Prevent other icons from turning blue */
+.menu-item:not(.backlog) .icon {
+  color: inherit;
 }
 
 /* Icons */
 .icon {
   margin-right: 10px;
   font-size: 18px;
+  display: flex;
+  align-items: center;
 }
 
 /* Content section */
