@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaUser, FaCog, FaPalette, FaUniversalAccess, FaBell, FaQuestionCircle } from "react-icons/fa";
+import { FaUser, FaCog, FaPalette, FaUniversalAccess, FaBell, FaQuestionCircle, FaListAlt } from "react-icons/fa";
 import "./App.css";
 
 const menuItems = [
@@ -8,6 +8,7 @@ const menuItems = [
   { id: 3, name: "Appearance", icon: <FaPalette /> },
   { id: 4, name: "Accessibility", icon: <FaUniversalAccess /> },
   { id: 5, name: "Notifications", icon: <FaBell /> },
+  { id: 6, name: "Backlog", icon: <FaListAlt /> },
 ];
 
 export default function Sidebar() {
@@ -18,16 +19,19 @@ export default function Sidebar() {
       {/* Sidebar */}
       <div className="sidebar">
         <ul className="menu">
-          {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={`menu-item ${selected === item.id ? "selected" : ""}`}
-              onClick={() => setSelected(item.id)}
-            >
-              <span className="icon">{item.icon}</span>
-              {item.name}
-            </li>
-          ))}
+          {menuItems.map((item) => {
+            const isBacklog = item.name === "Backlog";
+            return (
+              <li
+                key={item.id}
+                className={`menu-item ${selected === item.id ? "selected" : ""} ${isBacklog ? "backlog" : ""}`}
+                onClick={() => setSelected(item.id)}
+              >
+                <span className="icon">{item.icon}</span>
+                {item.name}
+              </li>
+            );
+          })}
         </ul>
       </div>
 
